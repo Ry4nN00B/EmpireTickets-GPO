@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: me.ry4nn00b.ticketsgpo.Main
+
