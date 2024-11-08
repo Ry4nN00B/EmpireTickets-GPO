@@ -104,7 +104,7 @@ public class pixCheck extends ListenerAdapter {
                             e.getChannel().asTextChannel().getManager().setName(channelName.replace("⌛", "✅")).queue();
 
                         e.getMessage().delete().queue();
-                        e.getHook().sendMessageEmbeds(MessagesManager.pixGenerate(Double.parseDouble(String.valueOf(price)), String.valueOf(transactionID), "confirmPayment"), MessagesManager.sendProof()).queue();
+                        e.getHook().sendMessageEmbeds(MessagesManager.pixGenerate(Double.parseDouble(String.valueOf(price)), String.valueOf(transactionID), "confirmPayment"), MessagesManager.deliveryTime()).queue();
 
                         gpoTransaction.remove(client);
                         gpoQRCode.remove(client);

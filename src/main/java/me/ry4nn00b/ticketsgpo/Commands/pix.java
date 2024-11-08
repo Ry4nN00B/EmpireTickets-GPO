@@ -100,8 +100,7 @@ public class pix extends ListenerAdapter {
                             } catch (MPException | MPApiException | IOException | WriterException ex) {
                                 throw new RuntimeException(ex);
                             }
-                        }
-                        e.reply(prefix + "Este cliente possui um pagamento pendente nesta categoria...").setEphemeral(true).queue();
+                        }else e.reply(prefix + "Este cliente possui um pagamento pendente nesta categoria...").setEphemeral(true).queue();
                     } else e.reply(prefix + "Esse ticket não pertence a categoria de GPO!").setEphemeral(true).queue();
                 }else e.reply(prefix + "Este canal não pertence a um ticket!").setEphemeral(true).queue();
             }else e.reply(prefix + "Essa interação está disponível apenas para nossa equipe!").setEphemeral(true).queue();

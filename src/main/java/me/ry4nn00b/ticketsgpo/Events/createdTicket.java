@@ -27,7 +27,7 @@ public class createdTicket extends ListenerAdapter {
 
         //Event
         if(channelName.contains("🛒┃")){
-            if(topicChannel.contains("Grand Piece Online")){
+            if(topicChannel.contains("┃Grand Piece Online")){
                 //Get client
                 String clientID = topicChannel.replace("🆔┃", "").replace("┃Grand Piece Online", "").trim();
                 Member client = e.getGuild().getMemberById(clientID);

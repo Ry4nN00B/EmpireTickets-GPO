@@ -247,5 +247,44 @@ public class MessagesManager {
 
         return builder.build();
     }
+    public static MessageEmbed deliveryTime(){
 
+        String message = """
+               **Obrigado por comprar na Empire Bux!**
+               
+               
+               *Irei fazer um breve resumo de como funciona a entrega dos itens de GPO.*
+               *Como as compras de GPO são por encomenda, o prazo pode ser um pouco mais extenso,*
+               *como **(3-4 dias)**, assim que o entregador pegar seu item, ele irá lhe marcar no*
+               *ticket pra fazer sua entrega via trade, dentro do jogo.*
+               """;
+
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setDescription(message);
+        builder.setColor(Color.decode("#2addf5"));
+        builder.setFooter("Empire Tickets - Sua fonte confiável!");
+
+        return builder.build();
+    }
+    public static MessageEmbed assumeTicket(Member staff, String channelName){
+
+        String message = """
+                🚀 **Empire Tickets** 🚀
+
+                🛈 **Um staff assumiu seu ticket!**
+
+                🔧 **Detalhes do Ticket:**
+                📝 **Canal:** *{channelName}*
+                👨‍💼 **Staff Responsável:** *{staffName}*
+                """;
+
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setDescription(message
+                .replace("{channelName}", channelName)
+                .replace("{staffName}", staff.getAsMention()));
+        builder.setColor(Color.decode("#2addf5"));
+        builder.setFooter("Empire Tickets - Sua fonte confiável!");
+
+        return builder.build();
+    }
 }

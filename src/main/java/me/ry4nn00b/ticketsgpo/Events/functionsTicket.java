@@ -10,6 +10,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.TimeUnit;
+
 public class functionsTicket extends ListenerAdapter {
 
     @Override
@@ -19,6 +21,7 @@ public class functionsTicket extends ListenerAdapter {
         String prefix = Main.prefix;
         Member member = e.getMember();
         String channelName = e.getChannel().getName();
+        String ticketChannelID = e.getChannelId();
 
         ConfigManager manager = new ConfigManager();
 
@@ -64,6 +67,19 @@ public class functionsTicket extends ListenerAdapter {
                     return;
                 }
             }else e.reply(prefix + "Esta interação está disponível apenas para nossa equipe!").setEphemeral(true).queue();
+        }
+
+        //Assume Ticket Button
+        if(e.getButton().getId().equals("assumeTicket")) {
+            if (member.getRoles().contains(allRole) || member.getRoles().contains(ownerRole) || member.getRoles().contains(subOwnerRole) || member.getRoles().contains(directorRole) || member.getRoles().contains(managerRole) || member.getRoles().contains(adminRole) || member.getRoles().contains(modRole) || member.getRoles().contains(supportRole)) {
+                if(manager.getAssumeTicket(ticketChannelID) == null){
+
+                    e.replyEmbeds(MessagesManager.assumeTicket(member, channelName)).queue();
+                    e.getChannel().sendMessage("!leader-manager-ass " + member.getAsMention()).queue(message -> message.delete().queueAfter(1, TimeUnit.SECONDS));
+                    manager.setAssumeTicket(ticketChannelID, String.valueOf(member.getUser().getIdLong()));
+
+                }else e.reply(prefix + "Outro staff assumiu este ticket.").setEphemeral(true).queue();
+            }else e.reply(prefix + "Esta interação esta disponível apenas para nossa equipe!").setEphemeral(true).queue();
         }
 
     }

@@ -72,7 +72,7 @@ public class Main {
 
         jda.addEventListener(
                 new closeTicket(), new pay(), new pix(), new resetMember(), new clientLeave(), new me.ry4nn00b.ticketsgpo.Events.closeTicket(),
-                new createdTicket(), new createTicket(), new functionsTicket(), new pixCheck());
+                new createdTicket(), new functionsTicket(), new pixCheck());
 
     }
 

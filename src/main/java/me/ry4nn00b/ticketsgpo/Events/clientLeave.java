@@ -31,10 +31,6 @@ public class clientLeave extends ListenerAdapter {
         //Roles
         Role supportRole = e.getGuild().getRoleById(manager.getSupportRole());
 
-        //Event
-        if(!SQLConstructs.hasMemberTable(client))
-            return;
-
         //GPO Ticket
         if(!SQLConstructs.getTicket(client, "gpoTicket").equals("false")){
 
@@ -53,7 +49,6 @@ public class clientLeave extends ListenerAdapter {
                     long transactionID = gpoTransaction.get(client);
                     PaymentClient paymentClient = new PaymentClient();
 
-                    SQLConstructs.setTicket(client, "gpoTicket", "false");
                     paymentClient.cancel(transactionID);
                     gpoTransaction.remove(client);
                     gpoQRCode.remove(client);
@@ -61,15 +56,16 @@ public class clientLeave extends ListenerAdapter {
 
                     ticketChannel.sendMessageEmbeds(MessagesManager.clientLeave(client)).addContent(supportRole.getAsMention())
                             .setActionRow(Button.danger("closeGPOTicketLeave", "\uD83D\uDDD1\uFE0F Deletar Ticket")).queue();
+                    SQLConstructs.setTicket(client, "gpoTicket", "false");
 
                 } catch (MPException | MPApiException ex) {
                     throw new RuntimeException(ex);
                 }
             }else {
 
-                SQLConstructs.setTicket(client, "gpoTicket", "false");
                 ticketChannel.sendMessageEmbeds(MessagesManager.clientLeave(client)).addContent(supportRole.getAsMention())
                         .setActionRow(Button.danger("closeGPOTicketLeave", "\uD83D\uDDD1\uFE0F Deletar Ticket")).queue();
+                SQLConstructs.setTicket(client, "gpoTicket", "false");
 
             }
 

@@ -103,8 +103,8 @@ public class closeTicket extends ListenerAdapter {
                     }
                 }
 
-                /*if(manager.getAssumeTicket(ticketChannelID) != null)
-                    manager.remAssumeTicket(ticketChannelID);*/
+                if(manager.getAssumeTicket(ticketChannelID) != null)
+                    manager.remAssumeTicket(ticketChannelID);
 
             }else e.reply(prefix + "Esta interação esta disponível apenas para nossa equipe!").setEphemeral(true).queue();
         }

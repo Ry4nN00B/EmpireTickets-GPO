@@ -38,10 +38,6 @@ public class pay extends ListenerAdapter {
         Role devRole = e.getGuild().getRoleById(manager.getDevRole());
         Role deliveryRole = e.getGuild().getRoleById(manager.getDeliveryRole());
 
-        //Get Tickets Amount
-        int ticketsAmount = Integer.parseInt(manager.getTickets());
-        int ticketsAmountSub = ticketsAmount - 1;
-
         //Channels
         TextChannel deliveryLogChannel = e.getGuild().getTextChannelById(manager.getDeliveryLogChannelID());
 
@@ -67,11 +63,10 @@ public class pay extends ListenerAdapter {
                         //Messages
                         deliveryLogChannel.sendMessageEmbeds(MessagesManager.deliveryLogMessage(client, link)).queue();
 
-                        manager.setTickets(String.valueOf(ticketsAmountSub));
                         SQLConstructs.setTicket(client, "gpoTicket", "false");
                         TranscriptionManager.saveAndSendMessages(client, member, ticketChannelID);
                         e.reply(prefix + "A entrega foi concluída! Vamos transcrever este ticket para segurança de todos!").queue();
-                        e.getChannel().sendMessage("!leader-manager " + member.getAsMention()).queue(message -> message.delete().queueAfter(2, TimeUnit.SECONDS));
+                        e.getChannel().sendMessage("!leader-manager-del " + member.getAsMention()).queue(message -> message.delete().queueAfter(2, TimeUnit.SECONDS));
                         e.getChannel().delete().queueAfter(3, TimeUnit.SECONDS);
                     } else e.reply(prefix + "Este ticket não pertence a categoria de GPO!").setEphemeral(true).queue();
                 }else e.reply(prefix + "Este canal não pertence a um ticket!").setEphemeral(true).queue();

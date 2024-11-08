@@ -61,6 +61,19 @@ public class ConfigManager {
         saveConfig();
     }
 
+    //AssumeTickets
+    public String getAssumeTicket(String ticketChannelID) {
+        return properties.getProperty(ticketChannelID);
+    }
+    public void setAssumeTicket(String ticketChannelID, String staffID) {
+        properties.setProperty(ticketChannelID, staffID);
+        saveConfig();
+    }
+    public void remAssumeTicket(String ticketChannelID) {
+        properties.remove(ticketChannelID);
+        saveConfig();
+    }
+
     //Staff Roles
     public String getAllRole() {
         return properties.getProperty("allRole");
