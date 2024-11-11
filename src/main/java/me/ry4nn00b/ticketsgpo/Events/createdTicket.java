@@ -18,7 +18,6 @@ public class createdTicket extends ListenerAdapter {
 
         //Variables
         String channelName = e.getChannel().getName();
-        String topicChannel = e.getChannel().asTextChannel().getTopic();
 
         ConfigManager manager = new ConfigManager();
 
@@ -27,6 +26,9 @@ public class createdTicket extends ListenerAdapter {
 
         //Event
         if(channelName.contains("🛒┃")){
+            //Information's
+            String topicChannel = e.getChannel().asTextChannel().getTopic();
+
             if(topicChannel.contains("┃Grand Piece Online")){
                 //Get client
                 String clientID = topicChannel.replace("🆔┃", "").replace("┃Grand Piece Online", "").trim();
