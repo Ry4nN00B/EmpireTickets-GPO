@@ -35,6 +35,9 @@ public class createdTicket extends ListenerAdapter {
                 Member client = e.getGuild().getMemberById(clientID);
                 String ticketChannelID = String.valueOf(e.getChannel().getIdLong());
 
+                if(!SQLConstructs.hasMemberTable(client))
+                    SQLConstructs.addMemberTable(client);
+
                 SQLConstructs.setTicket(client, "gpoTicket", ticketChannelID);
                 e.getChannel().asMessageChannel().sendMessageEmbeds(MessagesManager.createdGPO(client)).addContent(supportRole.getAsMention() + client.getAsMention())
                         .setActionRow(
